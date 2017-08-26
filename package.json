@@ -1,0 +1,39 @@
+{
+  "name": "zenscript",
+  "version": "1.0.0",
+  "description": "ZenScript Compiler",
+  "main": "index.html",
+  "scripts": {
+    "srcclean": "rm -rf src/*.js src/*.js.map src/*.ngfactory.ts",
+    "clean": "npm run srcclean && rm -rf aot",
+    "reallyclean": "npm run clean && rm -rf public",
+    "distclean": "npm run reallyclean && rm -rf node_modules .rpt2_cache",
+    "compile": "node_modules/.bin/tsc",
+    "rollup": "node_modules/.bin/rollup -c rollup-config.js",
+    "cp-index": "cp src/index.html public/",
+    "cp-files": "npm run cp-index",
+    "gzip": "gzip -f public/zsc.min.js",
+    "build": "npm run compile && npm run rollup && npm run cp-files && npm run gzip",
+    "start": "node_modules/http-server/bin/http-server",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "keean@fry-it.com",
+  "private": true,
+  "devDependencies": {
+    "http-server": "^0.9.0",
+    "rollup": "^0.36.4",
+    "rollup-plugin-commonjs": "^5.0.5",
+    "rollup-plugin-multi-entry": "^2.0.1",
+    "rollup-plugin-node-resolve": "^2.0.0",
+    "rollup-plugin-typescript2": "^0.4.6",
+    "rollup-plugin-uglify": "^1.0.1",
+    "tslib": "^1.6.0",
+    "typescript": "^2.5.1"
+  },
+  "dependencies": {
+    "@types/parsimmon": "^1.3.0",
+    "parsimmon": "^1.6.2",
+    "setimmediate": "^1.0.5",
+    "update": "^0.7.4"
+  }
+}
